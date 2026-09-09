@@ -1,0 +1,10 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "mcp": {
+    "shadcnspace": {
+      "type": "local",
+      "command": ["npx", "-y", "shadcnspace-mcp@latest"],
+      "enabled": true
+    }
+  }
+}
