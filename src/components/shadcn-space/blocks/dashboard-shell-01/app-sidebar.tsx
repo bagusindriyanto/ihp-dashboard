@@ -43,8 +43,8 @@ export type NavItem = {
 export const navData: NavItem[] = [
   // Dashboards Section
   { label: "Dashboards", isSection: true },
-  { title: "Analytics", icon: BarChart3, href: "#", isActive: true },
-  { title: "CRM Dashboard", icon: ClipboardList, href: "#" },
+  { title: "Analytics", icon: BarChart3, href: "/" },
+  { title: "CRM Dashboard", icon: ClipboardList, href: "/crm" },
 
   // Pages Section
   { label: "Pages", isSection: true },

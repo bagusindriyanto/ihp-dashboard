@@ -18,7 +18,7 @@ import {
 } from "@/components/ui/sidebar";
 import type { NavItem } from "@/components/shadcn-space/blocks/dashboard-shell-01/app-sidebar";
 import { cn } from "@/lib/utils";
-import { useLocation } from "react-router";
+import { Link, useLocation } from "react-router";
 
 export function NavMain({ items }: { items: NavItem[] }) {
   const { pathname } = useLocation();
@@ -77,6 +77,8 @@ export function NavMain({ items }: { items: NavItem[] }) {
             <SidebarMenuItem>
               <SidebarMenuButton
                 tooltip={item.title}
+                isActive={isActive}
+                render={<Link to={item.href ?? "#"} />}
                 className={cn(
                   "rounded-lg text-sm px-3 py-2 h-9 ",
                   isActive
@@ -85,9 +87,7 @@ export function NavMain({ items }: { items: NavItem[] }) {
                 )}
               >
                 {item.icon && <item.icon />}
-                <a href={item.href} className="w-full">
-                  {item.title}
-                </a>
+                <span>{item.title}</span>
               </SidebarMenuButton>
             </SidebarMenuItem>
           </SidebarMenu>
@@ -124,7 +124,7 @@ export function NavMain({ items }: { items: NavItem[] }) {
         <SidebarMenuSubItem key={item.title} className="w-full">
           <SidebarMenuSubButton
             className="w-full"
-            render={<a href={item.href}>{item.title}</a>}
+            render={<Link to={item.href ?? "#"}>{item.title}</Link>}
           />
         </SidebarMenuSubItem>
       );
