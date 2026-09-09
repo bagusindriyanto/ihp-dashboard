@@ -1,20 +1,33 @@
-import { Button } from "@/components/ui/button"
+import AppSidebar from "@/components/shadcn-space/blocks/dashboard-shell-01/app-sidebar"
+import StatisticsBlock from "@/components/shadcn-space/blocks/dashboard-shell-01/statistics"
+import SalesOverviewChart from "@/components/shadcn-space/blocks/dashboard-shell-01/sales-overview-chart"
+import EarningReportChart from "@/components/shadcn-space/blocks/dashboard-shell-01/earning-report-chart"
+import SalesByCountryWidget from "@/components/shadcn-space/blocks/dashboard-shell-01/salesbycountrywidget"
+import TopProductTable from "@/components/shadcn-space/blocks/dashboard-shell-01/top-product-table"
 
 export function App() {
   return (
-    <div className="flex min-h-svh p-6">
-      <div className="flex max-w-md min-w-0 flex-col gap-4 text-sm leading-loose">
-        <div>
-          <h1 className="font-medium">Project ready!</h1>
-          <p>You may now add components and start building.</p>
-          <p>We&apos;ve already added the button component for you.</p>
-          <Button className="mt-2">Button</Button>
+    <AppSidebar>
+      <div className="flex flex-1 flex-col gap-6 p-6">
+        <StatisticsBlock />
+        <div className="grid grid-cols-12 gap-6">
+          <div className="col-span-12 xl:col-span-8">
+            <SalesOverviewChart />
+          </div>
+          <div className="col-span-12 xl:col-span-4">
+            <EarningReportChart />
+          </div>
         </div>
-        <div className="font-mono text-xs text-muted-foreground">
-          (Press <kbd>d</kbd> to toggle dark mode)
+        <div className="grid grid-cols-12 gap-6">
+          <div className="col-span-12 xl:col-span-4">
+            <SalesByCountryWidget />
+          </div>
+          <div className="col-span-12 xl:col-span-8">
+            <TopProductTable />
+          </div>
         </div>
       </div>
-    </div>
+    </AppSidebar>
   )
 }
 
