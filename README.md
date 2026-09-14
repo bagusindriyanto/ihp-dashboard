@@ -177,6 +177,42 @@ Data yang ditampilkan pada dasbor saat ini didefinisikan langsung di dalam kompo
 
 Beberapa avatar, bendera, dan ilustrasi demonstrasi dimuat dari `images.shadcnspace.com`. Oleh karena itu, koneksi internet diperlukan agar gambar-gambar tersebut dapat ditampilkan. Aplikasi tetap dapat dijalankan tanpa aset tersebut.
 
+## Kontribusi dan Pull Request
+
+Ingin menambah fitur, menemukan bug, atau ingin memperbaiki sesuatu? Silakan buat Pull Request. Karena branch `master` dilindungi oleh ruleset, semua perubahan perlu melewati proses review terlebih dahulu dan tidak bisa di-push langsung.
+
+1. Pastikan branch `master` sudah versi terbaru, lalu buat branch baru untuk perubahanmu:
+
+   ```bash
+   git switch master
+   git pull origin master
+   git switch -c feat/nama-perubahan
+   ```
+
+   Kamu bisa menggunakan awalan `feat/` untuk fitur baru atau `fix/` untuk perbaikan bug.
+
+2. Setelah selesai mengerjakan perubahan, pastikan semuanya tetap berjalan dengan baik:
+
+   ```bash
+   pnpm lint
+   pnpm typecheck
+   pnpm build
+   ```
+
+   Jika kamu menggunakan npm, cukup ganti `pnpm` dengan `npm run`, misalnya `npm run lint`.
+
+3. Simpan perubahan dalam commit dengan pesan yang singkat dan jelas, lalu push branch tersebut:
+
+   ```bash
+   git add .
+   git commit -m "feat: jelaskan perubahan"
+   git push -u origin feat/nama-perubahan
+   ```
+
+4. Setelah branch berhasil di-push, buka GitHub dan klik **Compare & pull request**. Pastikan tujuan PR adalah branch `master`, lalu ceritakan secara singkat apa yang diubah dan alasannya.
+
+5. Jika ada masukan dari reviewer, lakukan perbaikan pada branch yang sama dan push kembali. PR dapat digabungkan ke `master` setelah seluruh pemeriksaan ruleset berhasil dan review telah disetujui.
+
 ## Catatan Penggunaan Package Manager
 
 Repositori ini menyediakan `pnpm-lock.yaml`, sehingga pnpm merupakan package manager bawaan proyek. Namun, npm tetap dapat digunakan dan akan membuat file `package-lock.json` ketika menjalankan `npm install`.
