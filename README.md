@@ -1,3 +1,43 @@
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://shieldcn.dev/header/grid.svg?title=IHP%20Dashboard&amp;subtitle=Mengintegrasikan%20semua%20dasbor%20IHP%20dalam%20satu%20platform&amp;logo=react&amp;theme=blue&amp;align=left&amp;mode=dark" />
+    <img src="https://shieldcn.dev/header/grid.svg?title=IHP%20Dashboard&amp;subtitle=Mengintegrasikan%20semua%20dasbor%20IHP%20dalam%20satu%20platform&amp;logo=react&amp;theme=blue&amp;align=left&amp;mode=light" alt="IHP Dashboard — Mengintegrasikan semua dasbor IHP dalam satu platform" />
+  </picture>
+</p>
+
+<p align="center">
+  <a href="https://vite.dev/">
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="https://shieldcn.dev/badge/Vite-8-646CFF.svg?variant=default&amp;logo=vite&amp;mode=dark" />
+      <img src="https://shieldcn.dev/badge/Vite-8-646CFF.svg?variant=default&amp;logo=vite&amp;mode=light" alt="Vite 8" />
+    </picture>
+  </a>
+  <a href="https://tailwindcss.com/">
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="https://shieldcn.dev/badge/Tailwind-CSS%204-06B6D4.svg?variant=default&amp;logo=tailwindcss&amp;mode=dark" />
+      <img src="https://shieldcn.dev/badge/Tailwind-CSS%204-06B6D4.svg?variant=default&amp;logo=tailwindcss&amp;mode=light" alt="Tailwind CSS 4" />
+    </picture>
+  </a>
+  <a href="https://react.dev/">
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="https://shieldcn.dev/badge/React-19-61DAFB.svg?variant=default&amp;logo=react&amp;mode=dark" />
+      <img src="https://shieldcn.dev/badge/React-19-61DAFB.svg?variant=default&amp;logo=react&amp;mode=light" alt="React 19" />
+    </picture>
+  </a>
+  <a href="https://www.typescriptlang.org/">
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="https://shieldcn.dev/badge/TypeScript-6-3178C6.svg?variant=default&amp;logo=typescript&amp;mode=dark" />
+      <img src="https://shieldcn.dev/badge/TypeScript-6-3178C6.svg?variant=default&amp;logo=typescript&amp;mode=light" alt="TypeScript 6" />
+    </picture>
+  </a>
+  <a href="https://ui.shadcn.com/">
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="https://shieldcn.dev/badge/shadcn-4.21.0-18181B.svg?variant=default&amp;logo=shadcnui&amp;mode=dark" />
+      <img src="https://shieldcn.dev/badge/shadcn-4.21.0-18181B.svg?variant=default&amp;logo=shadcnui&amp;mode=light" alt="shadcn 4.21.0" />
+    </picture>
+  </a>
+</p>
+
 # IHP Dashboard
 
 IHP Dashboard adalah antarmuka dasbor responsif yang dibangun menggunakan React dan TypeScript. Proyek ini menyediakan halaman analitik dan CRM yang tersusun dari komponen shadcn/ui yang reusable, grafik interaktif, tabel, navigasi, serta dukungan tema terang dan gelap.
@@ -140,7 +180,7 @@ import { Button } from "@/components/ui/button"
 
 ## Production Build
 
-Buat dan tampilkan pratinjau build yang telah dioptimalkan untuk produksi:
+Buat dan tampilkan pratinjau build yang telah dioptimalkan untuk production:
 
 Dengan pnpm:
 
