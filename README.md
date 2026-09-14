@@ -5,38 +5,11 @@
   </picture>
 </p>
 
-<p align="center">
-  <a href="https://vite.dev/">
-    <picture>
-      <source media="(prefers-color-scheme: dark)" srcset="https://shieldcn.dev/badge/Vite-8-646CFF.svg?variant=default&amp;logo=vite&amp;mode=dark" />
-      <img src="https://shieldcn.dev/badge/Vite-8-646CFF.svg?variant=default&amp;logo=vite&amp;mode=light" alt="Vite 8" />
-    </picture>
-  </a>
-  <a href="https://tailwindcss.com/">
-    <picture>
-      <source media="(prefers-color-scheme: dark)" srcset="https://shieldcn.dev/badge/Tailwind-CSS%204-06B6D4.svg?variant=default&amp;logo=tailwindcss&amp;mode=dark" />
-      <img src="https://shieldcn.dev/badge/Tailwind-CSS%204-06B6D4.svg?variant=default&amp;logo=tailwindcss&amp;mode=light" alt="Tailwind CSS 4" />
-    </picture>
-  </a>
-  <a href="https://react.dev/">
-    <picture>
-      <source media="(prefers-color-scheme: dark)" srcset="https://shieldcn.dev/badge/React-19-61DAFB.svg?variant=default&amp;logo=react&amp;mode=dark" />
-      <img src="https://shieldcn.dev/badge/React-19-61DAFB.svg?variant=default&amp;logo=react&amp;mode=light" alt="React 19" />
-    </picture>
-  </a>
-  <a href="https://www.typescriptlang.org/">
-    <picture>
-      <source media="(prefers-color-scheme: dark)" srcset="https://shieldcn.dev/badge/TypeScript-6-3178C6.svg?variant=default&amp;logo=typescript&amp;mode=dark" />
-      <img src="https://shieldcn.dev/badge/TypeScript-6-3178C6.svg?variant=default&amp;logo=typescript&amp;mode=light" alt="TypeScript 6" />
-    </picture>
-  </a>
-  <a href="https://ui.shadcn.com/">
-    <picture>
-      <source media="(prefers-color-scheme: dark)" srcset="https://shieldcn.dev/badge/shadcn-4.21.0-18181B.svg?variant=default&amp;logo=shadcnui&amp;mode=dark" />
-      <img src="https://shieldcn.dev/badge/shadcn-4.21.0-18181B.svg?variant=default&amp;logo=shadcnui&amp;mode=light" alt="shadcn 4.21.0" />
-    </picture>
-  </a>
-</p>
+<div align="center">
+
+[![Vite 8](https://shieldcn.dev/badge/Vite-8-646CFF.svg?variant=default&logo=vite)](https://vite.dev/) [![Tailwind CSS 4](https://shieldcn.dev/badge/Tailwind%20CSS-4-06B6D4.svg?variant=default&logo=tailwindcss)](https://tailwindcss.com/) [![React 19](https://shieldcn.dev/badge/React-19-61DAFB.svg?variant=default&logo=react)](https://react.dev/) [![TypeScript 6](https://shieldcn.dev/badge/TypeScript-6-3178C6.svg?variant=default&logo=typescript)](https://www.typescriptlang.org/) [![shadcn/ui 4.21.0](https://shieldcn.dev/badge/shadcn/ui-4.21.0-18181B.svg?variant=default&logo=shadcnui)](https://ui.shadcn.com/)
+
+</div>
 
 # IHP Dashboard
 
