@@ -209,7 +209,7 @@ Ingin menambah fitur, menemukan bug, atau ingin memperbaiki sesuatu? Silakan bua
    git push -u origin feat/nama-perubahan
    ```
 
-4. Setelah branch berhasil di-push, buka GitHub dan klik **Compare & pull request**. Pastikan tujuan PR adalah branch `master`, lalu ceritakan secara singkat apa yang diubah dan alasannya.
+4. Setelah branch berhasil di-push, buka GitHub dan klik **Compare & pull request**. Pastikan tujuan PR adalah branch `master`, lalu tulis secara singkat apa yang diubah dan alasannya.
 
 5. Jika ada masukan dari reviewer, lakukan perbaikan pada branch yang sama dan push kembali. PR dapat digabungkan ke `master` setelah seluruh pemeriksaan ruleset berhasil dan review telah disetujui.
 
