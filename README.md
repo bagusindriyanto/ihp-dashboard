@@ -199,7 +199,7 @@ Ingin menambah fitur, menemukan bug, atau ingin memperbaiki sesuatu? Silakan bua
    pnpm build
    ```
 
-   Jika kamu menggunakan npm, cukup ganti `pnpm` dengan `npm run`, misalnya `npm run lint`.
+   Jika kamu menggunakan npm, cukup ganti `pnpm` dengan `npm run`, misalnya `npm run typecheck`.
 
 3. Simpan perubahan dalam commit dengan pesan yang singkat dan jelas, lalu push branch tersebut:
 
