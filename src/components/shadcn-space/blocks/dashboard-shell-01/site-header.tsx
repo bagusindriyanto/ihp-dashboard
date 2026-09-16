@@ -1,13 +1,15 @@
-import { SidebarTrigger } from "@/components/ui/sidebar";
-import UserDropdown from "@/components/shadcn-space/blocks/dashboard-shell-01/user-dropdown";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import NotificationDropdown from "@/components/shadcn-space/blocks/dashboard-shell-01/notification-dropdown";
-import { BellRing, SearchIcon } from "lucide-react";
+import { SidebarTrigger } from "@/components/ui/sidebar"
+import UserDropdown from "@/components/shadcn-space/blocks/dashboard-shell-01/user-dropdown"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import NotificationDropdown from "@/components/shadcn-space/blocks/dashboard-shell-01/notification-dropdown"
+import { BellRing, SearchIcon } from "lucide-react"
 import {
   InputGroup,
   InputGroupAddon,
   InputGroupInput,
-} from "@/components/ui/input-group";
+} from "@/components/ui/input-group"
+import ThemeSwitcher from "@/components/theme-switcher"
+import RefreshToggle from "@/components/refresh-toggle"
 
 export function SiteHeader() {
   return (
@@ -22,11 +24,13 @@ export function SiteHeader() {
         </InputGroup>
       </div>
       <div className="flex items-center gap-3">
+        <RefreshToggle />
+        <ThemeSwitcher />
         <NotificationDropdown
           defaultOpen={false}
           align="center"
           trigger={
-            <div className="rounded-full p-2 hover:bg-accent relative before:absolute before:bottom-0 before:left-1/2 before:z-10 before:w-2 before:h-2 before:rounded-full before:bg-red-500 before:top-1 cursor-pointer">
+            <div className="relative cursor-pointer rounded-full p-2 before:absolute before:top-1 before:bottom-0 before:left-1/2 before:z-10 before:h-2 before:w-2 before:rounded-full before:bg-red-500 hover:bg-accent">
               <BellRing className="size-4" />
             </div>
           }
@@ -48,5 +52,5 @@ export function SiteHeader() {
         />
       </div>
     </div>
-  );
+  )
 }
