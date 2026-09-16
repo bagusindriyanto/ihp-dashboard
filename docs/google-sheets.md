@@ -5,15 +5,14 @@ Panduan ini membantu kamu menghubungkan data Google Sheets ke halaman dashboard.
 ## Gambaran Alur
 
 ```mermaid
-flowchart LR
+flowchart TD
   A["🧩 Komponen"] -->|"membaca config"| B["📋 SHEETS_REGISTRY"]
-  B --> C["🪝 useSheetData\n(spreadsheetKey, sheetKey)"]
+  B --> C["🪝 useSheetData(spreadsheetKey, sheetKey)"]
   C --> D["⚡ fetchData"]
   D --> E["🔍 fetchAndValidateSheet"]
   E -->|"HTTP request"| F["☁️ Google Sheets API"]
-
-  F -->|"raw rows"| G["🗂️ Mapping kolom\nsesuai schema"]
-  G --> H["✅ Validasi\nsetiap baris"]
+  F -->|"raw rows"| G["🗂️ Mapping kolom sesuai schema"]
+  G --> H["✅ Validasi setiap baris"]
   H -->|"data valid / error"| I["📦 TanStack Query"]
   I -->|"return"| A
 
