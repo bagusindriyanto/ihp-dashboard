@@ -10,7 +10,7 @@ type SheetKey<T extends SpreadsheetKey> = keyof Registry[T]["sheets"]
 type SheetShape<T extends SpreadsheetKey, U extends SheetKey<T>> =
   Registry[T]["sheets"][U] extends SheetConfig<infer Shape> ? Shape : never
 
-export const fetchData = async <T extends z.ZodRawShape>(
+const fetchData = async <T extends z.ZodRawShape>(
   spreadsheetId: string,
   sheetConfig: SheetConfig<T>
 ) => {
