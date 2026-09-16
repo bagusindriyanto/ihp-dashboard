@@ -104,7 +104,7 @@ Beberapa item pada sidebar masih berupa placeholder visual dan belum memiliki ha
 
 ```text
 ihp-dashboard/
-├── public/                         # Aset statis public
+├── public/                         # Aset statis publik
 ├── src/
 │   ├── assets/                     # Aset dan logo proyek
 │   ├── components/
