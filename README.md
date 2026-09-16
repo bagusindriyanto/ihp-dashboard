@@ -15,7 +15,11 @@
 
 IHP Dashboard adalah antarmuka dasbor responsif yang dibangun menggunakan React dan TypeScript. Proyek ini menyediakan halaman analitik dan CRM yang tersusun dari komponen shadcn/ui yang reusable, grafik interaktif, tabel, navigasi, serta dukungan tema terang dan gelap.
 
-Saat ini, proyek masih menggunakan data demonstrasi statis dan ditujukan sebagai fondasi front-end untuk aplikasi dasbor. Backend, database, penyedia autentikasi, dan environment variable tidak diperlukan untuk menjalankan proyek secara lokal.
+Sebagian halaman masih menggunakan data demonstrasi statis, sementara fitur Man Power mengambil data dari Google Sheets. Untuk menjalankan integrasi Sheets, siapkan `VITE_SHEETS_API_KEY` di `.env.local` sesuai panduan di bawah.
+
+## Dokumentasi Pengembangan
+
+- [Google Sheets dan schema fitur](docs/google-sheets.md): konfigurasi sumber data, cara fetch, penentuan schema Zod, penggunaan hook query, dan panduan menambah fitur untuk anggota tim maupun AI Agent.
 
 ## Fitur
 
@@ -173,7 +177,7 @@ Hasil build akan disimpan di direktori `dist/`. Karena aplikasi menggunakan rout
 
 ## Data dan Aset Eksternal
 
-Data yang ditampilkan pada dasbor saat ini didefinisikan langsung di dalam komponen React. Saat menghubungkan antarmuka dengan backend, ganti data statis tersebut dengan data dari API atau query layer.
+Sebagian data demonstrasi masih didefinisikan langsung di dalam komponen React. Fitur Man Power sudah membaca Google Sheets melalui API, memvalidasi data dengan schema Zod, lalu menyediakannya ke halaman melalui TanStack Query. Lihat [panduan Google Sheets dan schema fitur](docs/google-sheets.md) untuk mengikuti pola yang sama.
 
 Beberapa avatar, bendera, dan ilustrasi demonstrasi dimuat dari `images.shadcnspace.com`. Oleh karena itu, koneksi internet diperlukan agar gambar-gambar tersebut dapat ditampilkan. Aplikasi tetap dapat dijalankan tanpa aset tersebut.
 
