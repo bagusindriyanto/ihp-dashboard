@@ -1,4 +1,3 @@
-import { useFetchManPower } from "@/features/man-power/api/man-power.query"
 import {
   Card,
   CardContent,
@@ -24,6 +23,7 @@ import {
   EmptyTitle,
 } from "@/components/ui/empty"
 import { SearchXIcon } from "lucide-react"
+import { useSheetData } from "@/hooks/use-sheet-data"
 
 const columns = [
   ["nip", "NIP"],
@@ -42,7 +42,7 @@ const columns = [
 ] as const
 
 export default function ManPowerDashboard() {
-  const { data, isPending, isError } = useFetchManPower()
+  const { data, isPending, isError } = useSheetData("manPower", "employees")
 
   if (isPending)
     return (
