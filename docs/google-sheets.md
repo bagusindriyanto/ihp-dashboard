@@ -212,6 +212,72 @@ Lihat [halaman Man Power](../src/pages/man-power-dashboard.tsx) untuk contoh len
 | Hasil kosong tanpa error         | Respons `values`, range, dan cek apakah sumber memang kosong                    |
 | Key hook ditolak TypeScript      | Daftarkan spreadsheet dan sheet di registry. Gunakan key object, bukan nama tab |
 
+## Contoh Prompt untuk AI
+
+Saat meminta AI menambahkan sumber baru, berikan ID spreadsheet, nama tab, range tanpa header, serta daftar kolom sesuai urutan sumber. Sertakan tipe data dan aturan sel kosong. Tampilan sel saja belum cukup untuk menentukan tipe. Contoh: data `00123` harus tetap berupa string jika nol di depan perlu dipertahankan.
+
+### Template spreadsheet baru
+
+Salin prompt berikut dan ganti semua bagian dalam tanda `<...>`. Jika tipe atau format kolom belum diketahui, tulis bahwa informasinya belum tersedia agar AI tidak menebak.
+
+```text
+Tambahkan schema dan konfigurasi Google Sheets untuk feature <nama-feature>.
+Baca docs/google-sheets.md dan implementasi terkait sebelum mengedit.
+
+Sumber:
+- Spreadsheet ID: <ID dokumen, bukan gid tab>
+- Key spreadsheet di registry: <contoh: inventory>
+- Nama tab: <nama tab persis di Sheets>
+- Key sheet di registry: <contoh: items>
+- Range: <contoh: A2:D>
+
+Kolom, berurutan dari kolom pertama dalam range:
+1. <kolom Sheets> | <header> | <field camelCase> | <tipe data> | <boleh kosong?> | <transformasi jika ada>
+2. <kolom Sheets> | <header> | <field camelCase> | <tipe data> | <boleh kosong?> | <transformasi jika ada>
+
+Batasan:
+- Buat schema di src/features/<nama-feature>/schema/index.ts dan ekspor tipe outputnya.
+- Tambahkan sumber di src/config/sheets-registry.ts; pertahankan entri yang ada.
+- Gunakan z.object dengan urutan field sesuai kolom. Range tidak boleh mencakup header.
+- Ikuti pembersihan sel dan pola transformasi yang sudah tersedia.
+- Jangan membuat file API/query khusus, mengubah shared hook/parser, atau mengedit halaman.
+- Jika informasi penting kurang atau bertentangan, tanyakan sebelum menetapkan schema.
+
+Periksa tipe setelah perubahan. Jelaskan mapping kolom dan tunjukkan contoh
+pemanggilan useSheetData untuk sumber ini tanpa menerapkannya ke halaman.
+```
+
+### Contoh untuk inventory
+
+Contoh ini mengasumsikan kolom A–D berisi kode, nama, jumlah, dan tanggal masuk. Ganti placeholder ID dengan ID sumber sebenarnya sebelum mengirim prompt.
+
+```text
+Tambahkan schema dan config untuk feature inventory mengikuti docs/google-sheets.md.
+
+Spreadsheet ID: <ISI_ID_SPREADSHEET_SEBENARNYA>
+Key spreadsheet: inventory
+Nama tab: Stok Barang
+Key sheet: items
+Range: A2:D.
+
+Urutan kolom:
+1. A | Kode | code | string | wajib | pertahankan nol di depan
+2. B | Nama | name | string | wajib | tanpa transformasi
+3. C | Jumlah | quantity | number | boleh kosong menjadi null | jangan coercion
+4. D | Tanggal Masuk | receivedAt | angka serial Sheets | boleh kosong menjadi null | konversi ke Date dengan sheetsSerialToDate
+
+Kode pada sumber memang disimpan sebagai teks, bukan angka dengan format tampilan.
+Tanggal dikirim sebagai angka serial, bukan teks tanggal.
+
+Buat src/features/inventory/schema/index.ts dengan inventorySchema dan tipe Inventory.
+Tambahkan inventory.items ke SHEETS_REGISTRY tanpa mengubah entri lain.
+Jangan mengubah halaman, shared hook, atau parser, dan jangan membuat file API/query.
+Jika menemukan ketidaksesuaian dengan implementasi, jelaskan sebelum mengasumsikan solusinya.
+Periksa tipe dan berikan contoh useSheetData("inventory", "items").
+```
+
+Jika yang ditambahkan hanya tab dalam spreadsheet terdaftar, ubah instruksinya menjadi: “Tambahkan sheet `<key-sheet-baru>` ke `SHEETS_REGISTRY.<key-spreadsheet>.sheets`, gunakan spreadsheetId yang sudah ada, dan pertahankan sheet lainnya.” Tetap sertakan nama tab, range, urutan kolom, dan contoh nilai.
+
 ## Panduan untuk AI Agent
 
 - Selalu baca registry, tipe konfigurasi, shared hooks, fetch, helper, dan schema terkait sebelum mengubah implementasi.

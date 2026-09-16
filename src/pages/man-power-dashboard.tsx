@@ -24,6 +24,7 @@ import {
 } from "@/components/ui/empty"
 import { SearchXIcon } from "lucide-react"
 import { useSheetData } from "@/hooks/use-sheet-data"
+import type { ManPower } from "@/features/man-power/schema"
 
 const columns = [
   ["nip", "NIP"],
@@ -39,7 +40,7 @@ const columns = [
   ["foreman", "Foreman"],
   ["labourStatus", "Labour Status"],
   ["absence", "Absensi"],
-] as const
+] as const satisfies [keyof ManPower, string][]
 
 export default function ManPowerDashboard() {
   const { data, isPending, isError } = useSheetData("manPower", "employees")
@@ -84,7 +85,7 @@ export default function ManPowerDashboard() {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {data?.map((person, index) => (
+                {data.map((person, index) => (
                   <TableRow key={person.nip ?? index}>
                     <TableCell className="text-right">{index + 1}</TableCell>
                     {columns.map(([key]) => (
