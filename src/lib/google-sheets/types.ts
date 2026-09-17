@@ -1,9 +1,9 @@
-import z from 'zod';
+import { z } from "zod"
 
 export const sheetValueSchema = z
   .union([z.string(), z.number(), z.boolean()])
-  .nullish();
+  .nullish()
 
-export type SheetValue = z.infer<typeof sheetValueSchema>;
+export type SheetValue = z.infer<typeof sheetValueSchema>
 
-export type SheetRow = Record<string, SheetValue>;
+export type SheetRow = Record<string, Exclude<SheetValue, undefined>>
