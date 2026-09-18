@@ -1,11 +1,11 @@
-"use client";
+"use client"
 
-import { ChevronRight } from "lucide-react";
+import { ChevronRight } from "lucide-react"
 import {
   Collapsible,
   CollapsibleTrigger,
   CollapsibleContent,
-} from "@/components/ui/collapsible";
+} from "@/components/ui/collapsible"
 import {
   SidebarGroup,
   SidebarGroupLabel,
@@ -15,13 +15,13 @@ import {
   SidebarMenuSub,
   SidebarMenuSubItem,
   SidebarMenuSubButton,
-} from "@/components/ui/sidebar";
-import type { NavItem } from "@/components/shadcn-space/blocks/dashboard-shell-01/app-sidebar";
-import { cn } from "@/lib/utils";
-import { Link, useLocation } from "react-router";
+} from "@/components/ui/sidebar"
+import type { NavItem } from "@/components/shadcn-space/blocks/dashboard-shell-01/app-sidebar"
+import { cn } from "@/lib/utils"
+import { Link, useLocation } from "react-router"
 
 export function NavMain({ items }: { items: NavItem[] }) {
-  const { pathname } = useLocation();
+  const { pathname } = useLocation()
 
   // Recursive render function
   const renderItem = (item: NavItem) => {
@@ -29,17 +29,17 @@ export function NavMain({ items }: { items: NavItem[] }) {
     if (item.isSection && item.label) {
       return (
         <SidebarGroup key={item.label} className="p-0 pt-5 first:pt-0">
-          <SidebarGroupLabel className="p-0 text-xs font-medium uppercase text-sidebar-foreground">
+          <SidebarGroupLabel className="p-0 text-xs font-medium text-sidebar-foreground uppercase">
             {item.label}
           </SidebarGroupLabel>
         </SidebarGroup>
-      );
+      )
     }
-    const hasChildren = !!item.children?.length;
+    const hasChildren = !!item.children?.length
     // Item with children → collapsible
     if (hasChildren && item.title) {
       return (
-        <SidebarGroup key={item.title} className="p-0">
+        <SidebarGroup key={item.title} className="px-0 py-0.5">
           <SidebarMenu>
             <Collapsible>
               <SidebarMenuItem>
@@ -47,14 +47,14 @@ export function NavMain({ items }: { items: NavItem[] }) {
                   render={
                     <SidebarMenuButton
                       tooltip={item.title}
-                      className="rounded-xl text-sm px-3 py-2 h-9 cursor-pointer"
+                      className="h-9 cursor-pointer rounded-xl text-sm"
                     >
                       {item.icon && <item.icon size={16} />}
                       <span>{item.title}</span>
-                      <ChevronRight className="ml-auto transition-transform duration-200 collapsible/button-[aria-expanded='true']:rotate-90" />
+                      <ChevronRight className="ml-auto transition-transform duration-200 ease-out group-aria-expanded/collapsible-trigger:rotate-90" />
                     </SidebarMenuButton>
                   }
-                  className="w-full collapsible/button"
+                  className="group/collapsible-trigger w-full"
                 />
                 <CollapsibleContent>
                   <SidebarMenuSub className="me-0 pe-0">
@@ -65,14 +65,14 @@ export function NavMain({ items }: { items: NavItem[] }) {
             </Collapsible>
           </SidebarMenu>
         </SidebarGroup>
-      );
+      )
     }
     // Item without children
     if (item.title) {
-      const isActive = item.isActive ?? pathname === item.href;
+      const isActive = item.isActive ?? pathname === item.href
 
       return (
-        <SidebarGroup key={item.title} className="p-0">
+        <SidebarGroup key={item.title} className="px-0 py-0.5">
           <SidebarMenu>
             <SidebarMenuItem>
               <SidebarMenuButton
@@ -80,10 +80,10 @@ export function NavMain({ items }: { items: NavItem[] }) {
                 isActive={isActive}
                 render={<Link to={item.href ?? "#"} />}
                 className={cn(
-                  "rounded-lg text-sm px-3 py-2 h-9 ",
+                  "h-9 rounded-lg text-sm",
                   isActive
-                    ? "bg-primary hover:bg-primary dark:bg-blue-500 text-white dark:hover:bg-blue-500 hover:text-white"
-                    : "",
+                    ? "bg-primary text-white hover:bg-primary hover:text-white dark:bg-blue-500 dark:hover:bg-blue-500"
+                    : ""
                 )}
               >
                 {item.icon && <item.icon />}
@@ -92,22 +92,24 @@ export function NavMain({ items }: { items: NavItem[] }) {
             </SidebarMenuItem>
           </SidebarMenu>
         </SidebarGroup>
-      );
+      )
     }
-    return null;
-  };
+    return null
+  }
   // Recursive render function for sub-items
   const renderItemSub = (item: NavItem) => {
-    const hasChildren = !!item.children?.length;
+    const isActive = item.isActive ?? pathname === item.href
+    const hasChildren = !!item.children?.length
+
     if (hasChildren && item.title) {
       return (
         <SidebarMenuSubItem key={item.title}>
           <Collapsible>
-            <CollapsibleTrigger className="w-full">
-              <SidebarMenuSubButton className="rounded-xl text-sm px-3 py-2 h-9">
+            <CollapsibleTrigger className="group/collapsible-sub-trigger w-full">
+              <SidebarMenuSubButton className="h-9 rounded-xl px-3 py-2 text-sm">
                 {item.icon && <item.icon />}
                 <span>{item.title}</span>
-                <ChevronRight className="ml-auto transition-transform duration-200 data-[state=open]:rotate-90" />
+                <ChevronRight className="ml-auto transition-transform duration-200 ease-out group-aria-expanded/collapsible-sub-trigger:rotate-90" />
               </SidebarMenuSubButton>
             </CollapsibleTrigger>
             <CollapsibleContent>
@@ -117,20 +119,27 @@ export function NavMain({ items }: { items: NavItem[] }) {
             </CollapsibleContent>
           </Collapsible>
         </SidebarMenuSubItem>
-      );
+      )
     }
+
     if (item.title) {
       return (
         <SidebarMenuSubItem key={item.title} className="w-full">
           <SidebarMenuSubButton
-            className="w-full"
+            className={cn(
+              "w-full",
+              isActive
+                ? "bg-primary text-white hover:bg-primary hover:text-white dark:bg-blue-500 dark:hover:bg-blue-500"
+                : ""
+            )}
+            isActive={isActive}
             render={<Link to={item.href ?? "#"}>{item.title}</Link>}
           />
         </SidebarMenuSubItem>
-      );
+      )
     }
-    return null;
-  };
+    return null
+  }
 
-  return <>{items.map(renderItem)}</>;
+  return <>{items.map(renderItem)}</>
 }
