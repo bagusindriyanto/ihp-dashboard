@@ -1,12 +1,10 @@
-"use client"
-
 import { ArrowDown, ArrowUp, ArrowUpDown } from "lucide-react"
 import type { Column, RowData } from "@tanstack/react-table"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 import type { DataTableFeatures } from "./features"
 
-interface DataTableColumnHeaderProps<TData extends RowData> {
+type DataTableColumnHeaderProps<TData extends RowData> = {
   column: Column<DataTableFeatures, TData>
   title: string
   className?: string
@@ -38,10 +36,10 @@ export function DataTableColumnHeader<TData extends RowData>({
             ? "descending"
             : "none"
       }
-      className={cn("-ml-2 h-8 data-[state=open]:bg-accent", className)}
+      className={cn("-mx-2 h-8 w-full data-[state=open]:bg-accent", className)}
     >
       {title}
-      <Icon data-icon="inline-end" aria-hidden />
+      <Icon data-icon="inline-end" className="ml-auto" aria-hidden />
     </Button>
   )
 }

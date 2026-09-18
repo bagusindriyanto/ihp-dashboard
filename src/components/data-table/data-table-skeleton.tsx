@@ -1,9 +1,7 @@
-"use client"
-
 import { Skeleton } from "@/components/ui/skeleton"
 import { cn } from "@/lib/utils"
 
-interface DataTableSkeletonProps {
+type DataTableSkeletonProps = {
   columns?: number
   rows?: number
   showToolbar?: boolean
@@ -13,7 +11,7 @@ interface DataTableSkeletonProps {
 /** Loading placeholder dengan bentuk tabel. */
 export function DataTableSkeleton({
   columns = 5,
-  rows = 8,
+  rows = 10,
   showToolbar = true,
   className,
 }: DataTableSkeletonProps) {
@@ -24,9 +22,9 @@ export function DataTableSkeleton({
       aria-label="Loading table"
     >
       {showToolbar && (
-        <div className="flex items-center gap-2 py-4">
+        <div className="flex items-center gap-2">
           <Skeleton className="h-8 w-full max-w-sm" />
-          <Skeleton className="ml-auto hidden h-8 w-24 lg:block" />
+          <Skeleton className="ml-auto hidden h-7 w-24 lg:block" />
         </div>
       )}
       <div className="overflow-hidden rounded-md border">

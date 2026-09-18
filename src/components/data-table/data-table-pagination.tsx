@@ -1,12 +1,10 @@
-"use client"
-
+import type { ReactTable, RowData } from "@tanstack/react-table"
 import {
   ChevronLeft,
   ChevronRight,
   ChevronsLeft,
   ChevronsRight,
 } from "lucide-react"
-import type { ReactTable, RowData } from "@tanstack/react-table"
 import { Button } from "@/components/ui/button"
 import {
   Select,
@@ -18,7 +16,7 @@ import {
 } from "@/components/ui/select"
 import type { DataTableFeatures } from "./features"
 
-interface DataTablePaginationProps<TData extends RowData> {
+type DataTablePaginationProps<TData extends RowData> = {
   table: ReactTable<DataTableFeatures, TData>
   pageSizeOptions?: number[]
 }
@@ -30,22 +28,22 @@ export function DataTablePagination<TData extends RowData>({
   const pageSize = table.state.pagination.pageSize
 
   return (
-    <div className="flex flex-col gap-4 px-2 py-4 sm:flex-row sm:items-center sm:justify-between">
-      <div className="flex-1 text-sm text-muted-foreground">
-        {table.getFilteredSelectedRowModel().rows.length} of{" "}
-        {table.getFilteredRowModel().rows.length} row(s) selected.
+    <div className="flex items-center justify-between px-4">
+      <div className="hidden flex-1 text-sm text-muted-foreground lg:flex">
+        {table.getFilteredSelectedRowModel().rows.length} dari{" "}
+        {table.getFilteredRowModel().rows.length} baris terpilih.
       </div>
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-6 lg:gap-8">
-        <div className="flex items-center gap-2">
-          <p className="text-sm font-medium">Rows per page</p>
+      <div className="flex w-full items-center gap-8 lg:w-fit">
+        <div className="hidden items-center gap-2 lg:flex">
+          <p className="text-sm font-medium">Baris per halaman</p>
           <Select
             value={`${pageSize}`}
             onValueChange={(value) => table.setPageSize(Number(value))}
           >
-            <SelectTrigger className="h-8 w-[70px]">
+            <SelectTrigger size="sm" className="w-20">
               <SelectValue placeholder={pageSize} />
             </SelectTrigger>
-            <SelectContent side="top">
+            <SelectContent side="top" className="min-w-20">
               <SelectGroup>
                 {pageSizeOptions.map((size) => (
                   <SelectItem key={size} value={`${size}`}>
@@ -56,11 +54,11 @@ export function DataTablePagination<TData extends RowData>({
             </SelectContent>
           </Select>
         </div>
-        <div className="flex items-center justify-center text-sm font-medium">
-          Page {table.state.pagination.pageIndex + 1} of{" "}
+        <div className="flex w-fit items-center justify-center text-sm font-medium">
+          Halaman {table.state.pagination.pageIndex + 1} dari{" "}
           {Math.max(1, table.getPageCount())}
         </div>
-        <div className="flex items-center gap-2">
+        <div className="ml-auto flex items-center gap-2 lg:ml-0">
           <Button
             variant="outline"
             size="icon"
@@ -68,7 +66,7 @@ export function DataTablePagination<TData extends RowData>({
             onClick={() => table.firstPage()}
             disabled={!table.getCanPreviousPage()}
           >
-            <span className="sr-only">Go to first page</span>
+            <span className="sr-only">Ke halaman pertama</span>
             <ChevronsLeft aria-hidden />
           </Button>
           <Button
@@ -78,7 +76,7 @@ export function DataTablePagination<TData extends RowData>({
             onClick={() => table.previousPage()}
             disabled={!table.getCanPreviousPage()}
           >
-            <span className="sr-only">Go to previous page</span>
+            <span className="sr-only">Ke halaman sebelumnya</span>
             <ChevronLeft aria-hidden />
           </Button>
           <Button
@@ -88,7 +86,7 @@ export function DataTablePagination<TData extends RowData>({
             onClick={() => table.nextPage()}
             disabled={!table.getCanNextPage()}
           >
-            <span className="sr-only">Go to next page</span>
+            <span className="sr-only">Ke halaman berikutnya</span>
             <ChevronRight aria-hidden />
           </Button>
           <Button
@@ -98,7 +96,7 @@ export function DataTablePagination<TData extends RowData>({
             onClick={() => table.lastPage()}
             disabled={!table.getCanNextPage()}
           >
-            <span className="sr-only">Go to last page</span>
+            <span className="sr-only">Ke halaman terakhir</span>
             <ChevronsRight aria-hidden />
           </Button>
         </div>

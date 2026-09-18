@@ -1,7 +1,5 @@
-"use client"
-
-import { Settings2 } from "lucide-react"
 import type { ReactTable, RowData } from "@tanstack/react-table"
+import { Settings2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,
@@ -30,24 +28,27 @@ export function DataTableColumnToggle<TData extends RowData>({
             className="ml-auto hidden lg:flex"
           >
             <Settings2 data-icon="inline-start" aria-hidden />
-            Columns
+            Atur Kolom
           </Button>
         }
       />
-      <DropdownMenuContent align="end">
+      <DropdownMenuContent align="end" className="w-fit">
         <DropdownMenuGroup>
-          <DropdownMenuLabel>Toggle columns</DropdownMenuLabel>
+          <DropdownMenuLabel>Atur visibilitas kolom</DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuCheckboxItem
             checked={table.getIsAllColumnsVisible()}
             onCheckedChange={(value) => table.toggleAllColumnsVisible(!!value)}
           >
-            Toggle all
+            Semua kolom
           </DropdownMenuCheckboxItem>
           <DropdownMenuSeparator />
           {table
             .getAllColumns()
-            .filter((column) => column.getCanHide())
+            .filter(
+              (column) =>
+                typeof column.accessorFn !== "undefined" && column.getCanHide()
+            )
             .map((column) => (
               <DropdownMenuCheckboxItem
                 key={column.id}

@@ -88,8 +88,8 @@ const columns: ColumnDef<DataTableFeatures, ManPower>[] = [
       <DataTableColumnHeader column={column} title="Masa Kerja (Bulan)" />
     ),
     cell: ({ row }) =>
-      ((row.getValue("monthTenure") as ManPower["monthTenure"]) ??
-        "-") as number | string,
+      ((row.getValue("monthTenure") as ManPower["monthTenure"]) ?? "-") as
+        number | string,
   },
   {
     accessorKey: "jobdesc",
@@ -171,7 +171,7 @@ export default function ManPowerDashboard() {
             columns={columns}
             data={data ?? []}
             searchKey="name"
-            searchPlaceholder="Search name..."
+            searchPlaceholder="Cari nama karyawan..."
             isLoading={isPending}
             initialPageSize={10}
           />

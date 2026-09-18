@@ -1,6 +1,4 @@
-"use client"
-
-import * as React from "react"
+import { useState } from "react"
 import {
   useTable,
   type ColumnDef,
@@ -10,8 +8,12 @@ import {
   type RowSelectionState,
   type SortingState,
 } from "@tanstack/react-table"
-import { SearchX } from "lucide-react"
-import { Input } from "@/components/ui/input"
+import { Search, SearchX } from "lucide-react"
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupInput,
+} from "@/components/ui/input-group"
 import {
   Empty,
   EmptyDescription,
@@ -32,11 +34,11 @@ import { DataTableColumnToggle } from "./data-table-column-toggle"
 import { DataTablePagination } from "./data-table-pagination"
 import { DataTableSkeleton } from "./data-table-skeleton"
 
-export interface DataTableProps<TData extends RowData> {
+export type DataTableProps<TData extends RowData> = {
   columns: ColumnDef<DataTableFeatures, TData>[]
   data: TData[]
   /** accessorKey kolom yang difilter via search box. Kosongkan untuk sembunyikan search. */
-  searchKey?: string
+  searchKey?: keyof TData[][number]
   searchPlaceholder?: string
   isLoading?: boolean
   skeletonRows?: number
@@ -62,21 +64,19 @@ export function DataTable<TData extends RowData>({
   searchKey,
   searchPlaceholder = "Search...",
   isLoading = false,
-  skeletonRows = 8,
+  skeletonRows = 10,
   initialPageSize = 10,
   pageSizeOptions,
   initialSorting = [],
   initialVisibility = {},
-  emptyTitle = "No results.",
-  emptyDescription = "Try adjusting your search or filters.",
+  emptyTitle = "Tidak ada hasil",
+  emptyDescription = "Coba sesuaikan pencarian atau filter Anda.",
 }: DataTableProps<TData>) {
-  const [sorting, setSorting] = React.useState<SortingState>(initialSorting)
-  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
-    []
-  )
+  const [sorting, setSorting] = useState<SortingState>(initialSorting)
+  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
   const [columnVisibility, setColumnVisibility] =
-    React.useState<ColumnVisibilityState>(initialVisibility)
-  const [rowSelection, setRowSelection] = React.useState<RowSelectionState>({})
+    useState<ColumnVisibilityState>(initialVisibility)
+  const [rowSelection, setRowSelection] = useState<RowSelectionState>({})
 
   const table = useTable({
     features: dataTableFeatures,
@@ -90,32 +90,51 @@ export function DataTable<TData extends RowData>({
     state: { sorting, columnFilters, columnVisibility, rowSelection },
   })
 
-  if (isLoading) {
-    return <DataTableSkeleton columns={columns.length} rows={skeletonRows} />
-  }
-
   const rows = table.getRowModel().rows
   const showToolbar = Boolean(searchKey)
+
+  if (isLoading) {
+    return (
+      <DataTableSkeleton
+        columns={columns.length}
+        rows={skeletonRows}
+        showToolbar={showToolbar}
+      />
+    )
+  }
 
   return (
     <div className="flex flex-col gap-4">
       {showToolbar && (
         <div className="flex items-center gap-2">
-          <Input
-            placeholder={searchPlaceholder}
-            value={
-              (table.getColumn(searchKey!)?.getFilterValue() as string) ?? ""
-            }
-            onChange={(event) =>
-              table.getColumn(searchKey!)?.setFilterValue(event.target.value)
-            }
-            className="max-w-sm"
-          />
+          <InputGroup className="max-w-sm">
+            <InputGroupInput
+              placeholder={searchPlaceholder}
+              value={
+                (table
+                  .getColumn(String(searchKey))
+                  ?.getFilterValue() as string) ?? ""
+              }
+              onChange={(event) =>
+                table
+                  .getColumn(String(searchKey))
+                  ?.setFilterValue(event.target.value)
+              }
+            />
+            <InputGroupAddon>
+              <Search />
+            </InputGroupAddon>
+            {table.getColumn(String(searchKey))?.getFilterValue() ? (
+              <InputGroupAddon align="inline-end">
+                {table.getFilteredRowModel().rows.length} hasil
+              </InputGroupAddon>
+            ) : null}
+          </InputGroup>
           <DataTableColumnToggle table={table} />
         </div>
       )}
       <div className="overflow-hidden rounded-md border">
-        <Table>
+        <Table containerClassName="no-scrollbar">
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
