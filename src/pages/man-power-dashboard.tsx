@@ -6,51 +6,144 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table"
-import { ScrollArea } from "@/components/ui/scroll-area"
-import { Spinner } from "@/components/ui/spinner"
-import {
   Empty,
   EmptyDescription,
   EmptyHeader,
   EmptyMedia,
   EmptyTitle,
 } from "@/components/ui/empty"
+import {
+  DataTable,
+  DataTableColumnHeader,
+  type DataTableFeatures,
+} from "@/components/data-table"
+import type { ColumnDef } from "@tanstack/react-table"
 import { SearchXIcon } from "lucide-react"
 import { useSheetData } from "@/hooks/use-sheet-data"
 import type { ManPower } from "@/features/man-power/schema"
 
-const columns = [
-  ["nip", "NIP"],
-  ["name", "Name"],
-  ["division", "Division"],
-  ["section", "Section"],
-  ["job", "Job"],
-  ["joinDate", "Join Date"],
-  ["monthTenure", "Masa Kerja (Bulan)"],
-  ["jobdesc", "Jobdesk"],
-  ["zone", "Zona"],
-  ["leader", "Leader/Mentor"],
-  ["foreman", "Foreman"],
-  ["labourStatus", "Labour Status"],
-  ["absence", "Absensi"],
-] as const satisfies [keyof ManPower, string][]
+const textCell = (key: keyof ManPower) => {
+  const Cell = ({ row }: { row: { getValue: (id: string) => unknown } }) =>
+    ((row.getValue(key) as ManPower[typeof key]) ?? "-") as string
+  Cell.displayName = `ManPower${key}Cell`
+  return Cell
+}
+
+const columns: ColumnDef<DataTableFeatures, ManPower>[] = [
+  {
+    accessorKey: "nip",
+    meta: { label: "NIP" },
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="NIP" />
+    ),
+    cell: textCell("nip"),
+  },
+  {
+    accessorKey: "name",
+    meta: { label: "Name" },
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Name" />
+    ),
+    cell: textCell("name"),
+  },
+  {
+    accessorKey: "division",
+    meta: { label: "Division" },
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Division" />
+    ),
+    cell: textCell("division"),
+  },
+  {
+    accessorKey: "section",
+    meta: { label: "Section" },
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Section" />
+    ),
+    cell: textCell("section"),
+  },
+  {
+    accessorKey: "job",
+    meta: { label: "Job" },
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Job" />
+    ),
+    cell: textCell("job"),
+  },
+  {
+    accessorKey: "joinDate",
+    meta: { label: "Join Date" },
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Join Date" />
+    ),
+    cell: ({ row }) => {
+      const value = row.getValue("joinDate") as ManPower["joinDate"]
+      return value instanceof Date ? value.toLocaleDateString("id-ID") : "-"
+    },
+  },
+  {
+    accessorKey: "monthTenure",
+    meta: { label: "Masa Kerja (Bulan)" },
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Masa Kerja (Bulan)" />
+    ),
+    cell: ({ row }) =>
+      ((row.getValue("monthTenure") as ManPower["monthTenure"]) ??
+        "-") as number | string,
+  },
+  {
+    accessorKey: "jobdesc",
+    meta: { label: "Jobdesk" },
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Jobdesk" />
+    ),
+    cell: textCell("jobdesc"),
+  },
+  {
+    accessorKey: "zone",
+    meta: { label: "Zona" },
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Zona" />
+    ),
+    cell: textCell("zone"),
+  },
+  {
+    accessorKey: "leader",
+    meta: { label: "Leader/Mentor" },
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Leader/Mentor" />
+    ),
+    cell: textCell("leader"),
+  },
+  {
+    accessorKey: "foreman",
+    meta: { label: "Foreman" },
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Foreman" />
+    ),
+    cell: textCell("foreman"),
+  },
+  {
+    accessorKey: "labourStatus",
+    meta: { label: "Labour Status" },
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Labour Status" />
+    ),
+    cell: textCell("labourStatus"),
+  },
+  {
+    accessorKey: "absence",
+    meta: { label: "Absensi" },
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Absensi" />
+    ),
+    cell: textCell("absence"),
+  },
+]
 
 export default function ManPowerDashboard() {
   const { data, isPending, isError } = useSheetData("manPower", "employees")
 
-  if (isPending)
-    return (
-      <section className="flex h-full items-center justify-center">
-        <Spinner className="size-10 text-primary" />
-      </section>
-    )
   if (isError)
     return (
       <Empty className="h-full">
@@ -74,32 +167,14 @@ export default function ManPowerDashboard() {
           <CardDescription>Daftar data man power</CardDescription>
         </CardHeader>
         <CardContent>
-          <ScrollArea className="h-[60vh] overflow-auto rounded-md border">
-            <Table>
-              <TableHeader className="sticky top-0 z-10 bg-secondary">
-                <TableRow>
-                  <TableHead className="text-right">#</TableHead>
-                  {columns.map(([, label]) => (
-                    <TableHead key={label}>{label}</TableHead>
-                  ))}
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {data.map((person, index) => (
-                  <TableRow key={person.nip ?? index}>
-                    <TableCell className="text-right">{index + 1}</TableCell>
-                    {columns.map(([key]) => (
-                      <TableCell key={key}>
-                        {person[key] instanceof Date
-                          ? person[key].toLocaleDateString("id-ID")
-                          : (person[key] ?? "-")}
-                      </TableCell>
-                    ))}
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </ScrollArea>
+          <DataTable
+            columns={columns}
+            data={data ?? []}
+            searchKey="name"
+            searchPlaceholder="Search name..."
+            isLoading={isPending}
+            initialPageSize={10}
+          />
         </CardContent>
       </Card>
     </section>
