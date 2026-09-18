@@ -4,25 +4,19 @@ import {
   Sidebar,
   SidebarContent,
   SidebarHeader,
+  SidebarInset,
   SidebarMenu,
   SidebarMenuItem,
   SidebarProvider,
 } from "@/components/ui/sidebar"
-import { Card, CardContent } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
 import Logo from "@/assets/logo/logo"
 import { NavMain } from "@/components/shadcn-space/blocks/dashboard-shell-01/nav-main"
 import {
-  AlignStartVertical,
-  CreditCard,
-  LayoutPanelTop,
-  ChartPie,
   BarChart3,
   CircleUserRound,
   ClipboardList,
   Languages,
   Notebook,
-  NotepadText,
   Table,
   Ticket,
 } from "lucide-react"
@@ -39,7 +33,7 @@ export type NavItem = {
   isActive?: boolean
 }
 
-export const navData: NavItem[] = [
+const navData: NavItem[] = [
   // Dashboards Section
   { label: "Dashboards", isSection: true },
   { title: "Analytics", icon: BarChart3, href: "/" },
@@ -85,9 +79,9 @@ export const navData: NavItem[] = [
 const AppSidebar = ({ children }: { children: React.ReactNode }) => {
   return (
     <SidebarProvider>
-      <Sidebar className="bg-background px-0 py-4">
+      <Sidebar>
         {/* ---------------- Header ---------------- */}
-        <SidebarHeader className="px-4 py-0">
+        <SidebarHeader>
           <SidebarMenu>
             <SidebarMenuItem>
               <a href="#" className="h-full w-full">
@@ -98,18 +92,18 @@ const AppSidebar = ({ children }: { children: React.ReactNode }) => {
         </SidebarHeader>
 
         {/* ---------------- Content ---------------- */}
-        <SidebarContent>
+        <SidebarContent className="p-4">
           <NavMain items={navData} />
         </SidebarContent>
       </Sidebar>
 
       {/* ---------------- Main ---------------- */}
-      <div className="flex min-w-0 flex-1 flex-col">
+      <SidebarInset>
         <header className="sticky top-0 z-50 flex items-center border-b bg-background px-6 py-3">
           <SiteHeader />
         </header>
         <main className="flex-1">{children}</main>
-      </div>
+      </SidebarInset>
     </SidebarProvider>
   )
 }
