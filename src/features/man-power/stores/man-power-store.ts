@@ -1,4 +1,4 @@
-import { createFilterStore } from "@/store/create-filter-store"
+import { createFilterStore } from "@/stores/create-filter-store"
 
 export type ManPowerFilters = {
   search: string

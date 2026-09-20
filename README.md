@@ -38,7 +38,7 @@ Sebagian halaman masih menggunakan data demonstrasi statis, sementara fitur Man 
 - [Tailwind CSS 4](https://tailwindcss.com/) untuk styling
 - [shadcn/ui](https://ui.shadcn.com/) dan [Base UI](https://base-ui.com/) untuk komponen antarmuka yang reusable
 - [React Router](https://reactrouter.com/) untuk client-side routing
-- [Tanstack Table](https://tanstack.com/table/latest) untuk manajemen tabel data state
+- [Tanstack Table](https://tanstack.com/table/latest) untuk manajemen data-table state
 - [Tanstack Query](https://tanstack.com/query/latest) untuk manajemen server state
 - [Zustand](https://zustand-demo.pmnd.rs/) untuk manajemen client state
 - [Recharts](https://recharts.org/) untuk visualisasi data

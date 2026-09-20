@@ -5,6 +5,7 @@ import {
   createPaginatedRowModel,
   createSortedRowModel,
   filterFn_includesString,
+  metaHelper,
   rowPaginationFeature,
   rowSelectionFeature,
   rowSortingFeature,
@@ -32,7 +33,7 @@ export const dataTableFeatures = tableFeatures({
   sortedRowModel: createSortedRowModel(),
   filterFns: { includesString: filterFn_includesString },
   sortFns: { alphanumeric: sortFn_alphanumeric, text: sortFn_text },
-  columnMeta: {} as DataTableColumnMeta,
+  columnMeta: metaHelper<DataTableColumnMeta>(),
 })
 
 export type DataTableFeatures = typeof dataTableFeatures

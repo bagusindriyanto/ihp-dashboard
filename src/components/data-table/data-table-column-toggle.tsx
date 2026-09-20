@@ -12,12 +12,14 @@ import {
 } from "@/components/ui/dropdown-menu"
 import type { DataTableFeatures } from "./features"
 
+type DataTableColumnToggleProps<TData extends RowData> = {
+  table: ReactTable<DataTableFeatures, TData>
+}
+
 /** Dropdown untuk toggle visibilitas kolom (hanya kolom yang getCanHide()). */
 export function DataTableColumnToggle<TData extends RowData>({
   table,
-}: {
-  table: ReactTable<DataTableFeatures, TData>
-}) {
+}: DataTableColumnToggleProps<TData>) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger

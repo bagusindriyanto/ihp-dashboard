@@ -34,11 +34,11 @@ import { DataTableColumnToggle } from "./data-table-column-toggle"
 import { DataTablePagination } from "./data-table-pagination"
 import { DataTableSkeleton } from "./data-table-skeleton"
 
-export type DataTableProps<TData extends RowData> = {
+export type DataTableProps<TData extends RowData, TKey extends keyof TData> = {
   columns: ColumnDef<DataTableFeatures, TData>[]
   data: TData[]
   /** accessorKey kolom yang difilter via search box. Kosongkan untuk sembunyikan search. */
-  searchKey?: keyof TData[][number]
+  searchKey?: TKey
   searchPlaceholder?: string
   isLoading?: boolean
   skeletonRows?: number
@@ -58,7 +58,7 @@ export type DataTableProps<TData extends RowData> = {
  * ];
  * <DataTable columns={columns} data={data} searchKey="email" />
  */
-export function DataTable<TData extends RowData>({
+export function DataTable<TData extends RowData, TKey extends keyof TData>({
   columns,
   data,
   searchKey,
@@ -71,7 +71,7 @@ export function DataTable<TData extends RowData>({
   initialVisibility = {},
   emptyTitle = "Tidak ada hasil",
   emptyDescription = "Coba sesuaikan pencarian atau filter Anda.",
-}: DataTableProps<TData>) {
+}: DataTableProps<TData, TKey>) {
   const [sorting, setSorting] = useState<SortingState>(initialSorting)
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
   const [columnVisibility, setColumnVisibility] =
