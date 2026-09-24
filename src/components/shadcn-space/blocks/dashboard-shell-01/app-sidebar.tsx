@@ -98,7 +98,7 @@ const AppSidebar = ({ children }: { children: React.ReactNode }) => {
       </Sidebar>
 
       {/* ---------------- Main ---------------- */}
-      <SidebarInset>
+      <SidebarInset className="min-w-0">
         <header className="sticky top-0 z-50 flex items-center border-b bg-background px-6 py-3">
           <SiteHeader />
         </header>
