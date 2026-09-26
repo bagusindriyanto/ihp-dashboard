@@ -24,6 +24,8 @@ export const manPowerSchema = z.object({
   job: z.string().nullable(),
   joinDate: sheetDateField(),
   monthTenure: z.coerce.number().nullable(),
+  tenure: z.string().nullable(),
+  tenureCategory: z.string().nullable(),
   jobdesc: z.string().nullable(),
   zone: z.string().nullable(),
   leader: z.string().nullable(),

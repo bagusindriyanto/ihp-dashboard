@@ -142,7 +142,10 @@ const columns: ColumnDef<DataTableFeatures, ManPower>[] = [
 ]
 
 export default function ManPowerDashboard() {
-  const { data, isPending, isError } = useSheetData("manPower", "employees")
+  const { data, isPending, isError, dataUpdatedAt } = useSheetData(
+    "manPower",
+    "employees"
+  )
 
   if (isError)
     return (
@@ -164,7 +167,10 @@ export default function ManPowerDashboard() {
       <Card>
         <CardHeader>
           <CardTitle>Man Power</CardTitle>
-          <CardDescription>Daftar data man power</CardDescription>
+          <CardDescription>
+            Terakhir diperbarui:{" "}
+            {new Date(dataUpdatedAt).toLocaleString("id-ID") || "-"}
+          </CardDescription>
         </CardHeader>
         <CardContent>
           <DataTable
