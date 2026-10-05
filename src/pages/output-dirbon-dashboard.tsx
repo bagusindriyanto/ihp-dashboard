@@ -1,5 +1,6 @@
 import {
   Card,
+  CardAction,
   CardContent,
   CardDescription,
   CardHeader,
@@ -24,6 +25,9 @@ import {
 } from "@/components/ui/empty"
 import { SearchXIcon } from "lucide-react"
 import { useSheetData } from "@/hooks/use-sheet-data"
+import { dropEmptyRows } from "@/lib/drop-empty-rows"
+import { SourceSheetLink } from "@/components/source-sheet-link"
+import { SHEETS_REGISTRY } from "@/config/sheets-registry"
 import type { OutputDirbon } from "@/features/output-dirbon/schema"
 
 const columns = [
@@ -91,12 +95,19 @@ export default function OutputDirbonDashboard() {
       </Empty>
     )
 
+  const rows = dropEmptyRows(data ?? [], "tanggal")
+
   return (
     <section className="p-4">
       <Card>
         <CardHeader>
           <CardTitle>Output Dirbon</CardTitle>
           <CardDescription>Daftar data output dirbon per jam</CardDescription>
+          <CardAction>
+            <SourceSheetLink
+              spreadsheetId={SHEETS_REGISTRY.inputOutput.spreadsheetId}
+            />
+          </CardAction>
         </CardHeader>
         <CardContent>
           <ScrollArea className="h-[60vh] overflow-auto rounded-md border">
@@ -112,7 +123,7 @@ export default function OutputDirbonDashboard() {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {data.map((item, index) => (
+                {rows.map((item, index) => (
                   <TableRow key={`${item.nik}-${item.tanggal}-${index}`}>
                     <TableCell className="text-right">{index + 1}</TableCell>
                     {columns.map(([key]) => (

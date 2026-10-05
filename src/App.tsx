@@ -3,6 +3,7 @@ import AppSidebar from "@/components/shadcn-space/blocks/dashboard-shell-01/app-
 import AnalyticsDashboard from "@/pages/analytics-dashboard"
 import CRMDashboard from "@/pages/crm-dashboard"
 import ManPowerDashboard from "@/pages/man-power-dashboard"
+import ManPowerDatasourceDashboard from "@/pages/man-power-datasource-dashboard"
 import AllTargetDashboard from "@/pages/all-target-dashboard"
 import OutputPrintingDashboard from "@/pages/output-printing-dashboard"
 import OutputTPRDashboard from "@/pages/output-tpr-dashboard"
@@ -15,6 +16,7 @@ export default function App() {
         <Route path="/" element={<AnalyticsDashboard />} />
         <Route path="/crm" element={<CRMDashboard />} />
         <Route path="/man-power" element={<ManPowerDashboard />} />
+        <Route path="/man-power-data" element={<ManPowerDatasourceDashboard />} />
         <Route path="/all-target" element={<AllTargetDashboard />} />
         <Route path="/output-printing" element={<OutputPrintingDashboard />} />
         <Route path="/output-tpr" element={<OutputTPRDashboard />} />

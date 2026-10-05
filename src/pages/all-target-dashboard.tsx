@@ -1,5 +1,6 @@
 import {
   Card,
+  CardAction,
   CardContent,
   CardDescription,
   CardHeader,
@@ -24,6 +25,9 @@ import {
 } from "@/components/ui/empty"
 import { SearchXIcon } from "lucide-react"
 import { useSheetData } from "@/hooks/use-sheet-data"
+import { dropEmptyRows } from "@/lib/drop-empty-rows"
+import { SourceSheetLink } from "@/components/source-sheet-link"
+import { SHEETS_REGISTRY } from "@/config/sheets-registry"
 import type { AllTarget } from "@/features/all-target/schema"
 
 const columns = [
@@ -70,12 +74,19 @@ export default function AllTargetDashboard() {
       </Empty>
     )
 
+  const rows = dropEmptyRows(data ?? [], "style")
+
   return (
     <section className="p-4">
       <Card>
         <CardHeader>
-          <CardTitle>All Target IHP</CardTitle>
+          <CardTitle>All Target IHP</CardTitle>{" "}
           <CardDescription>Daftar data all target IHP</CardDescription>
+          <CardAction>
+            <SourceSheetLink
+              spreadsheetId={SHEETS_REGISTRY.targetIHP.spreadsheetId}
+            />
+          </CardAction>
         </CardHeader>
         <CardContent>
           <ScrollArea className="h-[60vh] overflow-auto rounded-md border">
@@ -89,7 +100,7 @@ export default function AllTargetDashboard() {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {data.map((target, index) => (
+                {rows.map((target, index) => (
                   <TableRow key={target.kodeStyle ?? index}>
                     <TableCell className="text-right">{index + 1}</TableCell>
                     {columns.map(([key]) => (

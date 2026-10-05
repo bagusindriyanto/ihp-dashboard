@@ -24,12 +24,18 @@ export const manPowerSchema = z.object({
   job: z.string().nullable(),
   joinDate: sheetDateField(),
   monthTenure: z.coerce.number().nullable(),
+  masaKerjaTahun: z.string().nullable(),
+  kategoriMasaKerja: z.string().nullable(),
   jobdesc: z.string().nullable(),
   zone: z.string().nullable(),
   leader: z.string().nullable(),
   foreman: z.string().nullable(),
+  operator: z.string().nullable(),
   labourStatus: z.string().nullable(),
   absence: z.string().nullable(),
+  absloc: z.string().nullable(),
+  lokasiAbsen: z.string().nullable(),
+  shift: z.string().nullable(),
 })
 
 export type ManPower = z.infer<typeof manPowerSchema>

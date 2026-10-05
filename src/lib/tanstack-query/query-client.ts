@@ -7,6 +7,8 @@ export const queryClient = new QueryClient({
       staleTime: 60 * 1000, // 1 minutes
       // Seberapa lama data di-cache
       gcTime: 5 * 60 * 1000, // 5 minutes
+
+      refetchInterval: 1 * 60 * 1000, // 1 minutes
     },
   },
 })

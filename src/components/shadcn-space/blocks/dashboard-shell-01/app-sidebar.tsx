@@ -19,6 +19,7 @@ import {
   Notebook,
   Table,
   Ticket,
+  Users,
 } from "lucide-react"
 import type { LucideIcon } from "lucide-react"
 import { SiteHeader } from "@/components/shadcn-space/blocks/dashboard-shell-01/site-header"
@@ -38,6 +39,7 @@ const navData: NavItem[] = [
   { label: "Dashboards", isSection: true },
   { title: "Analytics", icon: BarChart3, href: "/" },
   { title: "CRM Dashboard", icon: ClipboardList, href: "/crm" },
+  { title: "Man Power", icon: Users, href: "/man-power" },
 
   // Pages Section
   { label: "Pages", isSection: true },
@@ -45,7 +47,7 @@ const navData: NavItem[] = [
     title: "Data Source",
     icon: Table,
     children: [
-      { title: "Man Power", href: "/man-power" },
+      { title: "Man Power Data", href: "/man-power-data" },
       { title: "All Target IHP", href: "/all-target" },
       { title: "Output Printing", href: "/output-printing" },
       { title: "Output TPR", href: "/output-tpr" },

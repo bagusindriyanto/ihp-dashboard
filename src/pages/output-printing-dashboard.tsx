@@ -1,5 +1,6 @@
 import {
   Card,
+  CardAction,
   CardContent,
   CardDescription,
   CardHeader,
@@ -24,6 +25,9 @@ import {
 } from "@/components/ui/empty"
 import { SearchXIcon } from "lucide-react"
 import { useSheetData } from "@/hooks/use-sheet-data"
+import { dropEmptyRows } from "@/lib/drop-empty-rows"
+import { SourceSheetLink } from "@/components/source-sheet-link"
+import { SHEETS_REGISTRY } from "@/config/sheets-registry"
 import type { OutputPrinting } from "@/features/output-printing/schema"
 
 const columns = [
@@ -93,12 +97,19 @@ export default function OutputPrintingDashboard() {
       </Empty>
     )
 
+  const rows = dropEmptyRows(data ?? [], "date")
+
   return (
     <section className="p-4">
       <Card>
         <CardHeader>
           <CardTitle>Output Printing</CardTitle>
           <CardDescription>Daftar data output printing per jam</CardDescription>
+          <CardAction>
+            <SourceSheetLink
+              spreadsheetId={SHEETS_REGISTRY.inputOutput.spreadsheetId}
+            />
+          </CardAction>
         </CardHeader>
         <CardContent>
           <ScrollArea className="h-[60vh] overflow-auto rounded-md border">
@@ -114,8 +125,8 @@ export default function OutputPrintingDashboard() {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {data.map((item, index) => (
-                  <TableRow key={index}>
+                {rows.map((item, index) => (
+                  <TableRow key={`${item.idOperator}-${item.date}-${index}`}>
                     <TableCell className="text-right">{index + 1}</TableCell>
                     {columns.map(([key]) => (
                       <TableCell key={key} className="whitespace-nowrap">

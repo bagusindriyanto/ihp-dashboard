@@ -29,3 +29,8 @@ export const buildSheetUrl = (
   });
   return `${API_BASE_URL}/${spreadsheetId}/values/${encodedRange}?${params}`;
 };
+
+/** URL buka file spreadsheet di browser (tanpa API key). */
+export const buildSourceUrl = (spreadsheetId: string): string => {
+  return `https://docs.google.com/spreadsheets/d/${spreadsheetId}/edit`;
+};
